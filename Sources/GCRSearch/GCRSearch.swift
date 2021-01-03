@@ -11,6 +11,8 @@ import Foundation
 
 public class GCRSearch {
 
+    public init() { }
+
     public func search(_ options: SearchOptions = .default, completion: @escaping (IndexResult?) -> Void) {
         // Build Search Body
         var queryItems: [URLQueryItem] = []
