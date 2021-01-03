@@ -100,17 +100,21 @@ public struct IndexRow {
 
     public struct Subject {
 
-        var string: String
+        public var string: String
 
-        var name: String?
-        var location: String?
-        var category: String?
-        var docketNumber: String?
+        public var name: String?
+        public var location: String?
+        public var category: String?
+        public var docketNumber: String?
 
-        init(string: String) {
+        public init(string: String) {
             self.string = string
 
-            let components = string.components(separatedBy: ", ")
+            var components = string.components(separatedBy: ", ")
+            while components.count > 3 {
+                components[0] = [components[0], components[1]].joined(separator: ", ")
+                components.remove(at: 1)
+            }
             if components.count == 3 {
                 name = components[0]
                 location = components[1]
