@@ -6,7 +6,7 @@
 //
 
 
-public enum Court: Equatable {
+public enum Court: Equatable, CaseIterable {
 
     case all
 
@@ -27,7 +27,7 @@ public enum Court: Equatable {
     case schleswigHolstein(_ court: SchleswigHolstein)
     case thueringen(_ court: Thueringen)
 
-    var subCourt: Courtable? {
+    public var subCourt: Courtable? {
         switch self {
         case .all: return nil
         case .badenWuerttemberg(let court): return court

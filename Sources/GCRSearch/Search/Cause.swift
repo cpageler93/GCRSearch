@@ -21,7 +21,7 @@ public enum Cause {
     case proceedingsWithoutListing
 
 
-    var searchValue: String {
+    public var searchValue: String {
         switch self {
         case .all: return "0"
         case .newEnrollments: return "1"
@@ -34,7 +34,7 @@ public enum Cause {
         }
     }
 
-    var title: String {
+    public var title: String {
         switch self {
         case .all: return "Alle Bekanntmachungen"
         case .newEnrollments: return "Neueintragungen"

@@ -16,7 +16,7 @@ public enum Order {
     case companyOrName
     case docketNumber
 
-    var title: String {
+    public var title: String {
         switch self {
         case .dateOfAnnouncement: return "Datum der Bekanntmachung"
         case .dateOfEnrollment: return "Datum der Eintragung/Anordnung"
@@ -25,7 +25,7 @@ public enum Order {
         }
     }
 
-    var searchValue: String {
+    public var searchValue: String {
         switch self {
         case .dateOfAnnouncement: return "4"
         case .dateOfEnrollment: return "3"

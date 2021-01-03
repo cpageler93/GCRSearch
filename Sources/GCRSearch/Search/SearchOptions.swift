@@ -32,6 +32,17 @@ public struct SearchOptions {
     /// Sortierung
     public var order: Order
 
+    public init(court: Court, from: Date?, to: Date?, category: Category?,
+                docketNumber: String?, cause: Cause, order: Order) {
+        self.court = court
+        self.from = from
+        self.to = to
+        self.category = category
+        self.docketNumber = docketNumber
+        self.cause = cause
+        self.order = order
+    }
+
     public static var `default`: SearchOptions {
         SearchOptions(court: .all, from: nil, to: nil, category: nil,
                       docketNumber: nil, cause: .all, order: .dateOfAnnouncement)

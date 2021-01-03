@@ -19,7 +19,7 @@ public enum Category {
     case pr
     case ar
 
-    var searchValue: String {
+    public var searchValue: String {
         switch self {
         case .hra: return "A"
         case .hrb: return "B"
