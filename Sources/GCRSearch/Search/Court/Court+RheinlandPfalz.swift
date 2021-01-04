@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum RheinlandPfalz: Courtable {
+    enum RheinlandPfalz: Courtable, CaseIterable {
 
         case badKreuznach
         case kaiserslautern

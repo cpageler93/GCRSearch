@@ -6,7 +6,7 @@
 //
 
 
-public enum Court: Equatable, CaseIterable {
+public enum Court: Equatable {
 
     case all
 
@@ -50,6 +50,64 @@ public enum Court: Equatable, CaseIterable {
     }
 
 }
+
+
+extension Court: CaseIterable {
+
+    public static var allCases: [Court] {
+        let courtsByFederalState = [
+            [.all],
+            BadenWuerttemberg.allCases.map { Court.badenWuerttemberg($0) },
+            Bayern.allCases.map { Court.bayern($0) },
+            Berlin.allCases.map { Court.berlin($0) },
+            Brandenburg.allCases.map { Court.brandenburg($0) },
+            Bremen.allCases.map { Court.bremen($0) },
+            Hamburg.allCases.map { Court.hamburg($0) },
+            Hessen.allCases.map { Court.hessen($0) },
+            MecklenburgVorpommern.allCases.map { Court.mecklenburgVorpommern($0) },
+            Niedersachsen.allCases.map { Court.niedersachsen($0) },
+            NordrheinWestfalen.allCases.map { Court.nordrheinWestfalen($0) },
+            RheinlandPfalz.allCases.map { Court.rheinlandPfalz($0) },
+            Saarland.allCases.map { Court.saarland($0) },
+            Sachsen.allCases.map { Court.sachsen($0) },
+            SachsenAnhalt.allCases.map { Court.sachsenAnhalt($0) },
+            SchleswigHolstein.allCases.map { Court.schleswigHolstein($0) },
+            Thueringen.allCases.map { Court.thueringen($0) },
+        ]
+        return courtsByFederalState.reduce([], +)
+    }
+
+}
+
+
+extension Court: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let stringDescription = try container.decode(String.self)
+        guard let court = Court.allCases.first(where: { $0.description == stringDescription }) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid search value")
+        }
+
+        self = court
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(description)
+    }
+
+}
+
+
+extension Court: CustomStringConvertible {
+
+    public var description: String {
+        [searchValue, subCourt?.searchValue].compactMap({ $0 }).joined(separator: ":")
+    }
+
+}
+
 
 public protocol Courtable {
 

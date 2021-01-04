@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum MecklenburgVorpommern: Courtable {
+    enum MecklenburgVorpommern: Courtable, CaseIterable {
 
         case anklam
         case badDoberan

@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Niedersachsen: Courtable {
+    enum Niedersachsen: Courtable, CaseIterable {
 
         case aurich
         case braunschweig

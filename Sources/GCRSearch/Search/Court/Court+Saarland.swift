@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Saarland: Courtable {
+    enum Saarland: Courtable, CaseIterable {
 
         case homburg
         case lebach

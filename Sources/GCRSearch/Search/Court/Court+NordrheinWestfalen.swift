@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum NordrheinWestfalen: Courtable {
+    enum NordrheinWestfalen: Courtable, CaseIterable {
 
         case aachen
         case arnsberg

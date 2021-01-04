@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum BadenWuerttemberg: Courtable {
+    enum BadenWuerttemberg: Courtable, CaseIterable {
 
         case aalen
         case achern

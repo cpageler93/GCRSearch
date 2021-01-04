@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Sachsen: Courtable {
+    enum Sachsen: Courtable, CaseIterable {
 
         case annaberg
         case aue

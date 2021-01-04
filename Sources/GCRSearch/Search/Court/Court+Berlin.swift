@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Berlin: Courtable {
+    enum Berlin: Courtable, CaseIterable {
 
         case charlottenburgBerlin
 

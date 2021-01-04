@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Thueringen: Courtable {
+    enum Thueringen: Courtable, CaseIterable {
 
         case altenburg
         case apolda

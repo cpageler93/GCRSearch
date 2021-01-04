@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum SchleswigHolstein: Courtable {
+    enum SchleswigHolstein: Courtable, CaseIterable {
 
         case flensburg
         case kiel

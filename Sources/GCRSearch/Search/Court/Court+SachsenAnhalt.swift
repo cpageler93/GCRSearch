@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum SachsenAnhalt: Courtable {
+    enum SachsenAnhalt: Courtable, CaseIterable {
 
         case stendal
 

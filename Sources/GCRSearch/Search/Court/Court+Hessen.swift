@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Hessen: Courtable {
+    enum Hessen: Courtable, CaseIterable {
 
         case badHersfeld
         case badHomburg

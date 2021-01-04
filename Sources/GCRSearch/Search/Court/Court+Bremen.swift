@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Bremen: Courtable {
+    enum Bremen: Courtable, CaseIterable {
 
         case bremen
         // Bremerhaven bis zum 31.12.2012

@@ -11,7 +11,7 @@ import Foundation
 
 public extension Court {
 
-    enum Bayern: Courtable {
+    enum Bayern: Courtable, CaseIterable {
 
         case amberg
         case ansbach
