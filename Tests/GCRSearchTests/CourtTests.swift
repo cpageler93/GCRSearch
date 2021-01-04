@@ -33,4 +33,10 @@ class CourtTests: XCTestCase {
         XCTAssertThrowsError(try JSONDecoder().decode(Court.self, from: "\"foo\"".data(using: .utf8)!))
     }
 
+    func testCourtFromString() throws {
+        XCTAssertEqual(Court(string: ""), Court.all)
+        XCTAssertEqual(Court(string: "ni:P3210"), Court.niedersachsen(.oldenburg))
+        XCTAssertNil(Court(string: "foobar"))
+    }
+
 }
