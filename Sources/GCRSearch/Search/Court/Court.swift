@@ -152,6 +152,10 @@ extension Court: Courtable {
         }
     }
 
+    public var fullTitle: String {
+        [title, subCourt?.title].compactMap({ $0 }).joined(separator: " - ")
+    }
+
     public var searchValue: String {
         switch self {
         case .all: return ""
