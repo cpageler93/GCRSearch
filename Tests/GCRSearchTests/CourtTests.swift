@@ -34,9 +34,9 @@ class CourtTests: XCTestCase {
     }
 
     func testCourtFromString() throws {
-        XCTAssertEqual(Court(string: ""), Court.all)
-        XCTAssertEqual(Court(string: "ni:P3210"), Court.niedersachsen(.oldenburg))
-        XCTAssertNil(Court(string: "foobar"))
+        XCTAssertEqual(Court(rawValue: ""), Court.all)
+        XCTAssertEqual(Court(rawValue: "ni:P3210"), Court.niedersachsen(.oldenburg))
+        XCTAssertNil(Court(rawValue: "foobar"))
     }
 
     func testCourtFullTitle() throws {

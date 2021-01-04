@@ -80,31 +80,18 @@ extension Court: CaseIterable {
 }
 
 
-extension Court: Codable {
+extension Court: Codable { }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let stringDescription = try container.decode(String.self)
 
-        guard let court = Court.fromString(stringDescription) else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid search value")
-        }
+extension Court: RawRepresentable {
+
+    public var rawValue: String {
+        description
+    }
+
+    public init?(rawValue: String) {
+        guard let court = Court.allCases.first(where: { $0.description == rawValue }) else { return nil }
         self = court
-    }
-
-    public static func fromString(_ string: String) -> Court? {
-        Court.allCases.first(where: { $0.description == string })
-    }
-
-    public init?(string: String) {
-        guard let court = Court.fromString(string) else { return nil }
-
-        self = court
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(description)
     }
 
 }
