@@ -22,7 +22,7 @@ public class IndexParser {
             }
             return IndexRow(url: url, date: date, subject: IndexRow.Subject(string: subject))
         }
-        return IndexResult(expectedRowCount: expectedRowCount, rows: rows)
+        return IndexResult(rawContent: content, expectedRowCount: expectedRowCount, rows: rows)
     }
 
     private func parseExpectedRowCount(content: String) -> Int? {
@@ -86,6 +86,7 @@ public class IndexParser {
 
 public struct IndexResult {
 
+    public var rawContent: String
     public var expectedRowCount: Int?
     public var rows: [IndexRow]
 

@@ -31,7 +31,8 @@ public class DetailParser {
             dateOfEnrollment = dateFormatterForDateOfEnrollment.date(from: dateOfEnrollmentString)
         }
 
-        return DetailResult(court: court,
+        return DetailResult(rawContent: content,
+                            court: court,
                             category: categoryAndDocketNumber?.0,
                             docketNumber: categoryAndDocketNumber?.1,
                             dateOfAnnouncement: dateOfAnnoucement,
@@ -97,6 +98,8 @@ public class DetailParser {
 
 
 public struct DetailResult {
+
+    public var rawContent: String
 
     public var court: String?
     public var category: String?
