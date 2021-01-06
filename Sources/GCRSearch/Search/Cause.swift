@@ -20,7 +20,6 @@ public enum Cause {
     case revisions
     case proceedingsWithoutListing
 
-
     public var searchValue: String {
         switch self {
         case .all: return "0"
@@ -47,5 +46,43 @@ public enum Cause {
         }
     }
 
+
+}
+
+
+extension Cause: Codable { }
+
+
+extension Cause: CaseIterable { }
+
+
+extension Cause: RawRepresentable {
+
+    public var rawValue: String {
+        description
+    }
+
+    public init?(rawValue: String) {
+        guard let court = Cause.allCases.first(where: { $0.description == rawValue }) else { return nil }
+        self = court
+    }
+
+}
+
+
+extension Cause: CustomStringConvertible {
+
+    public var description: String {
+        switch self {
+        case .all: return "all"
+        case .newEnrollments: return "newEnrollments"
+        case .changes: return "changes"
+        case .deletionFromDepartment: return "deletionFromDepartment"
+        case .deletionAnnouncements: return "deletionAnnouncements"
+        case .deletions: return "deletions"
+        case .revisions: return "revisions"
+        case .proceedingsWithoutListing: return "proceedingsWithoutListing"
+        }
+    }
 
 }

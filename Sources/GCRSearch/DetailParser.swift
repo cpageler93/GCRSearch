@@ -11,7 +11,6 @@ import Foundation
 
 public class DetailParser {
 
-
     lazy var dateFormatterForDateOfEnrollment: DateFormatter = {
         let df = DateFormatter()
         df.dateFormat = "dd.MM.yyyy"
