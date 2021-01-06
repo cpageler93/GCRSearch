@@ -60,7 +60,7 @@ public class GCRSearch {
         urlRequest.addValue("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0", forHTTPHeaderField: "User-Agent")
 
         URLSession.shared.dataTask(with: urlRequest as URLRequest) { (data, response, error) in
-            if let data = data, let string = String(data: data, encoding: .utf8) {
+            if let string = self.string(from: data) {
                 let rows = IndexParser().parse(content: string)
                 completion(rows)
             } else {
@@ -76,7 +76,7 @@ public class GCRSearch {
         urlRequest.httpMethod = "GET"
 
         URLSession.shared.dataTask(with: urlRequest as URLRequest) { (data, response, error) in
-            if let data = data, let string = String(data: data, encoding: .utf8) {
+            if let string = self.string(from: data) {
                 let result = DetailParser().parse(content: string)
                 completion(result)
             } else {
@@ -108,6 +108,19 @@ public class GCRSearch {
         }
     }
 
+    private func string(from data: Data?) -> String? {
+        guard let data = data else { return nil }
+        if let utf8String = String(data: data, encoding: .utf8) {
+            return utf8String
+        } else {
+            if let windowsCP1252String = String(data: data, encoding: .windowsCP1252) {
+                return windowsCP1252String.cleanEncoding()
+            }
+        }
+
+        return nil
+    }
+
     private var decodedBaseURL: String {
         let encodedBaseURL = "aHR0cHM6Ly93d3cuaGFuZGVsc3JlZ2lzdGVyYmVrYW5udG1hY2h1bmdlbi5kZQ=="
         return String(data: Data(base64Encoded: encodedBaseURL)!, encoding: .utf8)!
@@ -126,6 +139,22 @@ public struct CrawlResult {
         public var index: IndexRow
         public var detail: DetailResult?
 
+    }
+
+}
+
+
+extension String {
+
+    func cleanEncoding() -> String {
+        let specialCharacters = ["ä", "ü", "ö", "Ä", "Ü", "Ö", "ß", "§", "°"]
+        var clean = self
+        for specialCharacter in specialCharacters {
+            let data = Data(specialCharacter.utf8)
+            guard let deformed = String(data: data, encoding: .windowsCP1252) else { continue }
+            clean = clean.replacingOccurrences(of: deformed, with: specialCharacter)
+        }
+        return clean
     }
 
 }
