@@ -107,6 +107,7 @@ public struct IndexRow {
         public var location: String?
         public var category: String?
         public var docketNumber: String?
+        public var docketNumberAppendix: String?
 
         public init(string: String) {
             self.string = string
@@ -120,12 +121,10 @@ public struct IndexRow {
                 name = components[0]
                 location = components[1]
 
-                // docket number is last element and seperated by " " from rest of the string
-                // just to make sure, category doesnt contain any " ", we rejoining the first components
-
-                if let categoryAndDocketNumber = components[2].seperateCategoryAndDocketNumber() {
-                    category = categoryAndDocketNumber.0
-                    docketNumber = categoryAndDocketNumber.1
+                if let categoryDocketNumberAppendix = components[2].seperateCategoryDocketNumberAndAppendix() {
+                    category = categoryDocketNumberAppendix.0
+                    docketNumber = categoryDocketNumberAppendix.1
+                    docketNumberAppendix = categoryDocketNumberAppendix.2
                 }
                 else {
                     print("Unable to handle category and docket number \(components[2])")
@@ -142,13 +141,29 @@ public struct IndexRow {
 
 internal extension String {
 
-    func seperateCategoryAndDocketNumber() -> (String, String)? {
-        let categoryAndDocketNumber = components(separatedBy: " ")
-        if categoryAndDocketNumber.count >= 2 {
-            let category = categoryAndDocketNumber.dropLast().joined(separator: " ")
-            let docketNumber = categoryAndDocketNumber.last!
-            return (category, docketNumber)
-        } else {
+    /// Seperates String to category, docket number and appendix
+    ///
+    /// String examples:
+    /// - VR 202248
+    /// - HRA 9927 HL
+    ///
+    /// - Returns: (Category, Docket Number, Appendix?)
+    func seperateCategoryDocketNumberAndAppendix() -> (String, String, String?)? {
+        let categoryDocketNumberAndAppendix = components(separatedBy: " ")
+        switch categoryDocketNumberAndAppendix.count {
+        case 2:
+            return (
+                categoryDocketNumberAndAppendix[0],
+                categoryDocketNumberAndAppendix[1],
+                nil
+            )
+        case 3:
+            return (
+                categoryDocketNumberAndAppendix[0],
+                categoryDocketNumberAndAppendix[1],
+                categoryDocketNumberAndAppendix[2]
+            )
+        default:
             return nil
         }
     }

@@ -21,7 +21,7 @@ public class DetailParser {
         let court = parseCourt(content: content)?.trimmingCharacters(in: .whitespacesAndNewlines)
         let categoryAndDocketNumber = parseCategoryAndDocketNumber(content: content)?
             .trimmingCharacters(in: .whitespacesAndNewlines)
-            .seperateCategoryAndDocketNumber()
+            .seperateCategoryDocketNumberAndAppendix()
         let dateOfAnnoucement = parseDateOfAnnouncement(content: content)
         let tableBody = parseTableBody(content: content)
 
@@ -34,6 +34,7 @@ public class DetailParser {
                             court: court,
                             category: categoryAndDocketNumber?.0,
                             docketNumber: categoryAndDocketNumber?.1,
+                            docketNumberAppendix: categoryAndDocketNumber?.2,
                             dateOfAnnouncement: dateOfAnnoucement,
                             preContent: tableBody?[0],
                             cause: tableBody?[1],
@@ -103,6 +104,7 @@ public struct DetailResult {
     public var court: String?
     public var category: String?
     public var docketNumber: String?
+    public var docketNumberAppendix: String?
     public var dateOfAnnouncement: Date?
     public var preContent: String?
     public var cause: String?
