@@ -43,8 +43,8 @@ public class DetailParser {
     }
 
     private func parseCourt(content: String) -> String? {
-        // <U>([\s\S]*)Aktenzeichen
-        guard let regex = try? NSRegularExpression(pattern: #"<U>([\s\S]*)Aktenzeichen"#, options: []) else { return nil }
+        // <U>([\s\S]*)Aktenzeichen:
+        guard let regex = try? NSRegularExpression(pattern: #"<U>([\s\S]*)Aktenzeichen:"#, options: []) else { return nil }
         let range = NSRange(content.startIndex..., in: content)
         guard let match = regex.firstMatch(in: content, options: [], range: range) else { return nil }
         guard let matchRange = Range(match.range(at: 1), in: content) else { return nil }
